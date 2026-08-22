@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router";
-import afLogo from "../../assets/af-logo.png";
+import logo from "../../assets/Image/PlaceHolderLogo.png";
 
 const catalogLinks = [
   {
@@ -83,8 +83,8 @@ const SideNav = () => {
             <img
               key={pathname}
               className="brand-logo"
-              src={afLogo}
-              alt="Account Factory"
+              src={logo}
+              alt="Man, it's just a logo"
             />
           </NavLink>
           <button
