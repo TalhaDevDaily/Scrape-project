@@ -1,11 +1,10 @@
-import React from "react";
 import logo from "../../assets/Image/PlaceHolderLogo.png";
 import { CiHeart, CiSearch, CiShoppingCart } from "react-icons/ci";
 import { FaFlagCheckered } from "react-icons/fa";
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between items-center bg-[#777]">
+    <nav className="site-navbar af-head__deck flex justify-between items-center">
       <div className="left-div flex gap-1 border">
         <div className="logo-div border">
           <div className="w-[50px] h-[50px]">

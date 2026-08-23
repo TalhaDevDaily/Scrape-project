@@ -120,6 +120,7 @@ const SideNav = () => {
                 onClick={() => setIsOpen(false)}
               >
                 <span>{link.label}</span>
+                {link.count && <span className="link-count">{link.count}</span>}
               </NavLink>
             ))}
           </div>
