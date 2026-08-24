@@ -13,16 +13,22 @@ import {
 import { FiShoppingCart } from "react-icons/fi";
 import Cart from "../common/Cart";
 import { useEffect, useState } from "react";
-import { CART_UPDATED_EVENT } from "../common/cartEvents";
+import { CART_UPDATED_EVENT, getCartItemCount } from "../common/cartEvents";
 
 const Layout = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(getCartItemCount);
 
   useEffect(() => {
-    const openCartAfterAdd = () => setIsCartOpen(true);
-    window.addEventListener(CART_UPDATED_EVENT, openCartAfterAdd);
+    const handleCartUpdate = (event) => {
+      setCartCount(getCartItemCount());
+      if (event.detail?.product) {
+        setIsCartOpen(true);
+      }
+    };
+    window.addEventListener(CART_UPDATED_EVENT, handleCartUpdate);
     return () =>
-      window.removeEventListener(CART_UPDATED_EVENT, openCartAfterAdd);
+      window.removeEventListener(CART_UPDATED_EVENT, handleCartUpdate);
   }, []);
 
   const handleOpenCart = () => setIsCartOpen(true);
@@ -98,10 +104,11 @@ const Layout = () => {
         <button
           type="button"
           onClick={handleOpenCart}
-          className="af-float af-float--cart"
-          aria-label="Open cart"
+          className="af-float af-float--cart cursor-pointer"
+          aria-label={`Open cart with ${cartCount} items`}
         >
           <FiShoppingCart />
+          {cartCount > 0 && <span className="af-float-badge">{cartCount}</span>}
         </button>
       </div>
 

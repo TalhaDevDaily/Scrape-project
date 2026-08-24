@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { FaMinus, FaPlus, FaShoppingCart, FaTrash } from "react-icons/fa";
-import { CART_UPDATED_EVENT } from "./cartEvents";
+import { CART_UPDATED_EVENT, emitCartUpdated } from "./cartEvents";
 
 const CART_STORAGE_KEY = "af-cart-items";
 
@@ -62,6 +62,7 @@ const Cart = ({ isOpen, onClose }) => {
     } catch {
       // Storage is optional; cart state still works for the current session.
     }
+    emitCartUpdated(items);
   }, [items]);
 
   const itemCount = useMemo(

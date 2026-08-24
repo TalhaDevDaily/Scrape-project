@@ -1,9 +1,28 @@
+import { useEffect, useState } from "react";
 import logo from "../../assets/Image/PlaceHolderLogo.png";
 import { Link, NavLink } from "react-router";
 import { CiHeart, CiSearch, CiShoppingCart } from "react-icons/ci";
 import { MdArrowRightAlt } from "react-icons/md";
+import { FAVORITES_UPDATED_EVENT, getFavoriteCount } from "./favoritesEvents";
+import { CART_UPDATED_EVENT, getCartItemCount } from "./cartEvents";
 
 const Navbar = ({ onOpenCart }) => {
+  const [favoriteCount, setFavoriteCount] = useState(getFavoriteCount);
+  const [cartCount, setCartCount] = useState(getCartItemCount);
+
+  useEffect(() => {
+    const syncFavorites = () => setFavoriteCount(getFavoriteCount());
+    window.addEventListener(FAVORITES_UPDATED_EVENT, syncFavorites);
+    return () =>
+      window.removeEventListener(FAVORITES_UPDATED_EVENT, syncFavorites);
+  }, []);
+
+  useEffect(() => {
+    const syncCart = () => setCartCount(getCartItemCount());
+    window.addEventListener(CART_UPDATED_EVENT, syncCart);
+    return () => window.removeEventListener(CART_UPDATED_EVENT, syncCart);
+  }, []);
+
   return (
     <nav className="site-navbar af-head__deck flex justify-between items-center">
       <div className="left-div flex gap-1 border">
@@ -49,16 +68,24 @@ const Navbar = ({ onOpenCart }) => {
           <CiSearch aria-hidden="true" />
           {/* <input aria-label="Search product" placeholder="Search product" /> */}
         </form>
-        <Link className="nav-icon-link" to="/favorites" aria-label="Favorites">
+        <Link
+          className="nav-icon-link nav-icon-link--favorite"
+          to="/favourites"
+          aria-label={`Favorites ${favoriteCount}`}
+        >
           <CiHeart />
+          {favoriteCount > 0 && (
+            <span className="nav-counter">{favoriteCount}</span>
+          )}
         </Link>
         <button
           type="button"
-          className="nav-icon-link"
+          className="nav-icon-link nav-icon-link--cart"
           onClick={onOpenCart}
-          aria-label="Open cart"
+          aria-label={`Cart ${cartCount}`}
         >
           <CiShoppingCart />
+          {cartCount > 0 && <span className="nav-counter">{cartCount}</span>}
         </button>
         <div className="nav-icon-link">
           <button

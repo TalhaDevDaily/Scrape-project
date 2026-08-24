@@ -1,6 +1,11 @@
 import { Link } from "react-router";
+import { useEffect, useState } from "react";
 import { FaBell, FaHeart, FaShoppingCart } from "react-icons/fa";
 import { addCartItem } from "../components/common/cartEvents";
+import {
+  isFavoriteItem,
+  toggleFavoriteItem,
+} from "../components/common/favoritesEvents";
 import { categories, getProducts } from "./categoryData";
 
 const tickerItems = [
@@ -230,6 +235,17 @@ const Home = () => {
 
 const HomeProductRow = ({ product, index }) => {
   const isAvailable = !product.delivery.toLowerCase().includes("out");
+  const [isFavorite, setIsFavorite] = useState(() =>
+    isFavoriteItem(product.id),
+  );
+
+  useEffect(() => {
+    const syncFavorite = () => setIsFavorite(isFavoriteItem(product.id));
+    window.addEventListener("af-favorites-updated", syncFavorite);
+    return () =>
+      window.removeEventListener("af-favorites-updated", syncFavorite);
+  }, [product.id]);
+
   return (
     <article
       className="af-prod home-product-row"
@@ -246,8 +262,12 @@ const HomeProductRow = ({ product, index }) => {
         </div>
       </Link>
       <button
-        className="af-fav"
+        className={`af-fav ${isFavorite ? "is-active" : ""}`}
         type="button"
+        onClick={() => {
+          toggleFavoriteItem(product);
+          setIsFavorite((current) => !current);
+        }}
         aria-label={`Favorite ${product.name}`}
       >
         <FaHeart />

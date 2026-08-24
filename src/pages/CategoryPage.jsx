@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router";
+import { useEffect, useState } from "react";
 import {
   FaBell,
   FaHeart,
@@ -7,6 +8,10 @@ import {
   FaShoppingCart,
 } from "react-icons/fa";
 import { addCartItem } from "../components/common/cartEvents";
+import {
+  isFavoriteItem,
+  toggleFavoriteItem,
+} from "../components/common/favoritesEvents";
 import { getCategory, getProducts } from "./categoryData";
 import NotFound from "./NotFound";
 
@@ -77,6 +82,17 @@ const CategoryPage = () => {
 
 const ProductRow = ({ product, index }) => {
   const isAvailable = !product.delivery.toLowerCase().includes("out");
+  const [isFavorite, setIsFavorite] = useState(() =>
+    isFavoriteItem(product.id),
+  );
+
+  useEffect(() => {
+    const syncFavorite = () => setIsFavorite(isFavoriteItem(product.id));
+    window.addEventListener("af-favorites-updated", syncFavorite);
+    return () =>
+      window.removeEventListener("af-favorites-updated", syncFavorite);
+  }, [product.id]);
+
   return (
     <article
       className="af-prod"
@@ -96,8 +112,12 @@ const ProductRow = ({ product, index }) => {
         </div>
       </Link>
       <button
-        className="af-fav"
+        className={`af-fav ${isFavorite ? "is-active" : ""}`}
         type="button"
+        onClick={() => {
+          toggleFavoriteItem(product);
+          setIsFavorite((current) => !current);
+        }}
         aria-label={`Add ${product.name} to favorites`}
       >
         <FaHeart />

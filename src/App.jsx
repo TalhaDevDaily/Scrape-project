@@ -8,6 +8,8 @@ import ShopRules from "./pages/ShopRules";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Checker from "./pages/Checker";
+import Favourites from "./pages/Favourites";
+import FavouritesDetail from "./pages/FavouritesDetail";
 
 function App() {
   return (
@@ -19,7 +21,9 @@ function App() {
             <Route path="/shoprules" element={<ShopRules />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/checker" element={<Checker />} />
+            <Route path="/favourites" element={<Favourites />} />
             <Route path="/blog/:slug" element={<BlogDetail />} />
+            <Route path="/favourites/:slug" element={<FavouritesDetail />} />
             <Route path="category/:categorySlug" element={<CategoryPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
