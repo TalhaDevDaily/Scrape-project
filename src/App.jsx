@@ -7,6 +7,7 @@ import CategoryPage from "./pages/CategoryPage";
 import ShopRules from "./pages/ShopRules";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
+import Checker from "./pages/Checker";
 
 function App() {
   return (
@@ -17,8 +18,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/shoprules" element={<ShopRules />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/checker" element={<Checker />} />
             <Route path="/blog/:slug" element={<BlogDetail />} />
-
             <Route path="category/:categorySlug" element={<CategoryPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>

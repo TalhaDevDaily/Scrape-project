@@ -8,16 +8,29 @@ import {
   FaCommentAlt,
   FaCreditCard,
   FaGoogle,
-  FaShoppingCart,
   FaTelegramPlane,
 } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
+import Cart from "../common/Cart";
+import { useEffect, useState } from "react";
+import { CART_UPDATED_EVENT } from "../common/cartEvents";
 
 const Layout = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  useEffect(() => {
+    const openCartAfterAdd = () => setIsCartOpen(true);
+    window.addEventListener(CART_UPDATED_EVENT, openCartAfterAdd);
+    return () =>
+      window.removeEventListener(CART_UPDATED_EVENT, openCartAfterAdd);
+  }, []);
+
+  const handleOpenCart = () => setIsCartOpen(true);
+  const handleCloseCart = () => setIsCartOpen(false);
   return (
     <div className="af-container relative">
       <div className="af-navbar-shell">
-        <Navbar />
+        <Navbar onOpenCart={handleOpenCart} />
       </div>
       <div className="af-layout pt-16">
         <SideNav />
@@ -82,14 +95,18 @@ const Layout = () => {
         >
           <FaTelegramPlane />
         </a>
-        <a
+        <button
+          type="button"
+          onClick={handleOpenCart}
           className="af-float af-float--cart"
-          href="/cart"
           aria-label="Open cart"
         >
           <FiShoppingCart />
-        </a>
+        </button>
       </div>
+
+      {/* .................  CART....... */}
+      <Cart isOpen={isCartOpen} onClose={handleCloseCart} />
     </div>
   );
 };

@@ -1,15 +1,14 @@
 import logo from "../../assets/Image/PlaceHolderLogo.png";
 import { Link, NavLink } from "react-router";
-import { CiHeart, CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
-import { FaLanguage } from "react-icons/fa";
+import { CiHeart, CiSearch, CiShoppingCart } from "react-icons/ci";
 import { MdArrowRightAlt } from "react-icons/md";
 
-const Navbar = () => {
+const Navbar = ({ onOpenCart }) => {
   return (
     <nav className="site-navbar af-head__deck flex justify-between items-center">
       <div className="left-div flex gap-1 border">
         <Link className="logo-div border" to="/">
-          <div className="w-[50px] h-[50px]">
+          <div className="w-12.5 h-12.5">
             <img
               src={logo}
               className="brand-logo w-full"
@@ -33,10 +32,10 @@ const Navbar = () => {
               <NavLink to="/shoprules">Shop rules</NavLink>
             </li>
             <li>
-              <NavLink to="/shoprules">Checker</NavLink>
+              <NavLink to="/checker">Checker</NavLink>
             </li>
             <li>
-              <NavLink to="/">2FA</NavLink>
+              <NavLink to="/checker#2fa">2FA</NavLink>
             </li>
           </ul>
         </menu>
@@ -53,9 +52,14 @@ const Navbar = () => {
         <Link className="nav-icon-link" to="/favorites" aria-label="Favorites">
           <CiHeart />
         </Link>
-        <Link className="nav-icon-link" to="/cart" aria-label="Cart">
+        <button
+          type="button"
+          className="nav-icon-link"
+          onClick={onOpenCart}
+          aria-label="Open cart"
+        >
           <CiShoppingCart />
-        </Link>
+        </button>
         <div className="nav-icon-link">
           <button
             className="nav-icon-link"
@@ -66,7 +70,7 @@ const Navbar = () => {
           </button>
         </div>
         <Link
-          className="group flex items-center rounded-4xl gap-3 text-sm p-1.75 px-3 bg-[#ffbf47] text-[#191204] transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_4px_26px_rgba(255,191,71,0.7)]"
+          className="group flex items-center rounded-4xl gap-3 text-sm p-1.75 px-3 bg-[#ffbf47] text-[#191204] transition-all duration-300 ease-out hover:-translate-y-0.75 hover:shadow-[0_4px_26px_rgba(255,191,71,0.7)]"
           to="/login"
         >
           Sign in

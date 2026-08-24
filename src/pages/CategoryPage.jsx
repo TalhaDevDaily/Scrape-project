@@ -1,5 +1,12 @@
 import { Link, useParams } from "react-router";
-import { FaBell, FaHeart, FaArrowUp, FaArrowDown } from "react-icons/fa";
+import {
+  FaBell,
+  FaHeart,
+  FaArrowUp,
+  FaArrowDown,
+  FaShoppingCart,
+} from "react-icons/fa";
+import { addCartItem } from "../components/common/cartEvents";
 import { getCategory, getProducts } from "./categoryData";
 import NotFound from "./NotFound";
 
@@ -107,7 +114,16 @@ const ProductRow = ({ product, index }) => {
         <span className={isAvailable ? "af-stock" : "af-out"}>
           {product.delivery}
         </span>
-        {isAvailable && <span className="af-quantity">− 1 +</span>}
+        {isAvailable && (
+          <button
+            className="af-cart"
+            type="button"
+            onClick={() => addCartItem(product)}
+            aria-label={`Add ${product.name} to cart`}
+          >
+            <FaShoppingCart />
+          </button>
+        )}
       </div>
     </article>
   );

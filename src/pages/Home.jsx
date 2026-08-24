@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { FaBell, FaHeart, FaShoppingCart } from "react-icons/fa";
+import { addCartItem } from "../components/common/cartEvents";
 import { categories, getProducts } from "./categoryData";
 
 const tickerItems = [
@@ -269,6 +270,7 @@ const HomeProductRow = ({ product, index }) => {
           <button
             className="af-cart"
             type="button"
+            onClick={() => addCartItem(product)}
             aria-label={`Add ${product.name} to cart`}
           >
             <FaShoppingCart />
