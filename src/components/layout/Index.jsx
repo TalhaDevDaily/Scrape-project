@@ -15,9 +15,11 @@ import { FiShoppingCart } from "react-icons/fi";
 
 const Layout = () => {
   return (
-    <div className="af-container">
-      <Navbar />
-      <div className="af-layout">
+    <div className="af-container relative">
+      <div className="af-navbar-shell">
+        <Navbar />
+      </div>
+      <div className="af-layout pt-16">
         <SideNav />
         <main className="af-main page-content">
           <Outlet />

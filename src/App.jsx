@@ -5,6 +5,8 @@ import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
 import ShopRules from "./pages/ShopRules";
+import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="/shoprules" element={<ShopRules />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogDetail />} />
 
             <Route path="category/:categorySlug" element={<CategoryPage />} />
             <Route path="*" element={<NotFound />} />

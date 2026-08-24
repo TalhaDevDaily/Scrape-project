@@ -2,6 +2,7 @@ import logo from "../../assets/Image/PlaceHolderLogo.png";
 import { Link, NavLink } from "react-router";
 import { CiHeart, CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
 import { FaLanguage } from "react-icons/fa";
+import { MdArrowRightAlt } from "react-icons/md";
 
 const Navbar = () => {
   return (
@@ -42,12 +43,12 @@ const Navbar = () => {
       </div>
       <div className="buttons-right-div flex  items-center gap-3">
         <form
-          className="af-sfield af-sfield--bar"
+          className="nav-icon-link"
           role="search"
           onSubmit={(event) => event.preventDefault()}
         >
           <CiSearch aria-hidden="true" />
-          <input aria-label="Search product" placeholder="Search product" />
+          {/* <input aria-label="Search product" placeholder="Search product" /> */}
         </form>
         <Link className="nav-icon-link" to="/favorites" aria-label="Favorites">
           <CiHeart />
@@ -55,15 +56,21 @@ const Navbar = () => {
         <Link className="nav-icon-link" to="/cart" aria-label="Cart">
           <CiShoppingCart />
         </Link>
-        <button
-          className="nav-language"
-          type="button"
-          aria-label="Select language"
+        <div className="nav-icon-link">
+          <button
+            className="nav-icon-link"
+            aria-label="Select language"
+            to="/cart"
+          >
+            EN
+          </button>
+        </div>
+        <Link
+          className="group flex items-center rounded-4xl gap-3 text-sm p-1.75 px-3 bg-[#ffbf47] text-[#191204] transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_4px_26px_rgba(255,191,71,0.7)]"
+          to="/login"
         >
-          <FaLanguage /> EN
-        </button>
-        <Link className="nav-signin" to="/login">
-          <CiUser /> Sign in <span>↗</span>
+          Sign in
+          <MdArrowRightAlt className="text-[#191204]! border-none! size-7.5! rounded-full! bg-[#140d022e]! transition-transform duration-300 ease-out group-hover:-rotate-45 " />
         </Link>
       </div>
     </nav>

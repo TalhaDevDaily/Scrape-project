@@ -307,6 +307,14 @@ body {
 .page-content {
   min-width: 0;
 }
+.af-navbar-shell {
+  position: fixed;
+  z-index: 50;
+  top: 20px;
+  left: 50%;
+  width: min(calc(100% - 88px), 1316px);
+  transform: translateX(-50%);
+}
 .site-navbar {
   min-height: 64px;
   color: #f5f4ed;
@@ -398,6 +406,82 @@ body {
   min-width: 0;
   padding: 10px 0 76px;
   color: #171a16;
+}
+.blog-index {
+  padding: 10px 0 76px;
+}
+.blog-index .af-content {
+  padding: 34px;
+}
+.blog-index h1 {
+  margin: 0;
+  color: #fff;
+  font-family: var(--af-font-display);
+  font-size: 32px;
+  line-height: 1.15;
+}
+.blog-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+.blog-card {
+  margin: 0;
+}
+.blog-card > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 24px;
+  border: 1px solid var(--af-line);
+  border-radius: 16px;
+  color: inherit;
+  background: #ffffff08;
+  text-decoration: none;
+  transition:
+    transform 0.3s var(--af-ease),
+    border-color 0.3s var(--af-ease),
+    background 0.3s var(--af-ease);
+}
+.blog-card > a:hover {
+  transform: translateY(-2px);
+  border-color: #d6e34b66;
+  background: #d6e34b0d;
+}
+.blog-card h2 {
+  margin: 0;
+  color: var(--af-text);
+  font-family: var(--af-font-display);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.blog-card p {
+  max-width: 72ch;
+  margin: 8px 0 12px;
+  color: var(--af-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.blog-card time {
+  color: #d6e34b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.blog-card__arrow {
+  flex: 0 0 auto;
+  color: #d6e34b;
+  font-size: 22px;
+  transition: transform 0.3s var(--af-ease);
+}
+.blog-card > a:hover .blog-card__arrow {
+  transform: translate(3px, -3px);
+}
+.blog-index .home-faq {
+  margin-top: 28px;
 }
 .af-promo {
   position: relative;
@@ -935,7 +1019,7 @@ body {
   .af-layout {
     grid-template-columns: 256px minmax(0, 1fr);
   }
-  .af-promo {
+  .af-rail {
     display: none;
   }
 }
@@ -983,6 +1067,9 @@ body {
   .af-container {
     padding: 12px 16px 54px;
   }
+  .af-navbar-shell {
+    width: calc(100% - 44px);
+  }
   .af-layout {
     display: block;
     margin-top: 12px;
@@ -1008,6 +1095,19 @@ body {
   }
   .catalog-page {
     padding: 34px 16px 54px;
+  }
+  .blog-index {
+    padding: 34px 0 54px;
+  }
+  .blog-index .af-content {
+    padding: 24px 18px;
+  }
+  .blog-card > a {
+    align-items: flex-start;
+    padding: 18px;
+  }
+  .blog-card h2 {
+    font-size: 14px;
   }
   .catalog-hero,
   .category-intro {
