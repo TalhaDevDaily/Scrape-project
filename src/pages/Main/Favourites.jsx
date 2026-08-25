@@ -5,7 +5,7 @@ import {
   FAVORITES_UPDATED_EVENT,
   readStoredFavorites,
   toggleFavoriteItem,
-} from "../components/common/favoritesEvents";
+} from "../../components/common/favoritesEvents";
 
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",

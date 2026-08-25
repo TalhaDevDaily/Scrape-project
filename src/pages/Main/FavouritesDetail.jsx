@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router";
-import { readStoredFavorites } from "../components/common/favoritesEvents";
+import { readStoredFavorites } from "../../components/common/favoritesEvents";
 
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",

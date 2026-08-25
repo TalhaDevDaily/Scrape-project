@@ -2,16 +2,16 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import "./App.css";
 import Layout from "./components/layout/Index";
 import NotFound from "./pages/Main/NotFound";
-import Home from "./pages/Home";
 import CategoryPage from "./pages/Main/CategoryPage";
 import ShopRules from "./pages/Main/ShopRules";
 import Blog from "./pages/Main/Blog";
 import BlogDetail from "./pages/Main/BlogDetail";
 import Checker from "./pages/Main/Checker";
-import Favourites from "./pages/Favourites";
-import FavouritesDetail from "./pages/FavouritesDetail";
+import Favourites from "./pages/Main/Favourites";
+import FavouritesDetail from "./pages/Main/FavouritesDetail";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
+import Home from "./pages/Main/Home";
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router";
-import { getBlogPost } from "./blogData";
+import { getBlogPost } from "../../assets/Datas/blogData";
 
 const BlogDetail = () => {
   const { slug } = useParams();

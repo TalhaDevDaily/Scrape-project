@@ -1,12 +1,12 @@
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { FaBell, FaHeart, FaShoppingCart } from "react-icons/fa";
-import { addCartItem } from "../components/common/cartEvents";
+import { addCartItem } from "../../components/common/cartEvents";
 import {
   isFavoriteItem,
   toggleFavoriteItem,
-} from "../components/common/favoritesEvents";
-import { categories, getProducts } from "./categoryData";
+} from "../../components/common/favoritesEvents";
+import { categories, getProducts } from "../../assets/Datas/categoryData";
 
 const tickerItems = [
   "Checked before sale",
