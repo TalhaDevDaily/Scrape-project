@@ -1,10 +1,10 @@
 import { Link, useParams } from "react-router";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
-import {} from "../components/common/favoritesEvents";
-import { getCategory, getProducts } from "./categoryData";
+import {} from "../../components/common/favoritesEvents";
+import { getCategory, getProducts } from "../../assets/Datas/categoryData";
 import NotFound from "./NotFound";
-import CategoryDetails from "../components/category/CategoryDetails";
-import ProductRow from "../components/category/ProductRow";
+import CategoryDetails from "../../components/category/CategoryDetails";
+import ProductRow from "../../components/category/ProductRow";
 
 const CategoryPage = () => {
   const { categorySlug } = useParams();

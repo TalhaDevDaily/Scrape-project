@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { blogPosts } from "./blogData";
+import { blogPosts } from "../../assets/Datas/blogData";
 
 const Blog = () => {
   return (
