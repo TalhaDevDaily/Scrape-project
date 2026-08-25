@@ -1,19 +1,10 @@
 import { Link, useParams } from "react-router";
-import { useEffect, useState } from "react";
-import {
-  FaBell,
-  FaHeart,
-  FaArrowUp,
-  FaArrowDown,
-  FaShoppingCart,
-} from "react-icons/fa";
-import { addCartItem } from "../components/common/cartEvents";
-import {
-  isFavoriteItem,
-  toggleFavoriteItem,
-} from "../components/common/favoritesEvents";
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import {} from "../components/common/favoritesEvents";
 import { getCategory, getProducts } from "./categoryData";
 import NotFound from "./NotFound";
+import CategoryDetails from "../components/category/CategoryDetails";
+import ProductRow from "../components/category/ProductRow";
 
 const CategoryPage = () => {
   const { categorySlug } = useParams();
@@ -64,14 +55,14 @@ const CategoryPage = () => {
             In stock only
           </label>
         </div>
-        <div className="af-list" aria-label={`${category.name} products`}>
+        <div className="af-list " aria-label={`${category.name} products`}>
           {products.map((product, index) => (
             <ProductRow product={product} index={index} key={product.id} />
           ))}
         </div>
       </section>
       <CategoryDetails category={category} />
-      <section className="trust-strip af-panel af-content">
+      <section className="trust-strip af-panel mt-2! af-content">
         <span className="status-dot" />
         <strong>Instant delivery after payment</strong>
         <span>Every item is checked before it reaches the catalog.</span>
@@ -79,113 +70,5 @@ const CategoryPage = () => {
     </div>
   );
 };
-
-const ProductRow = ({ product, index }) => {
-  const isAvailable = !product.delivery.toLowerCase().includes("out");
-  const [isFavorite, setIsFavorite] = useState(() =>
-    isFavoriteItem(product.id),
-  );
-
-  useEffect(() => {
-    const syncFavorite = () => setIsFavorite(isFavoriteItem(product.id));
-    window.addEventListener("af-favorites-updated", syncFavorite);
-    return () =>
-      window.removeEventListener("af-favorites-updated", syncFavorite);
-  }, [product.id]);
-
-  return (
-    <article
-      className="af-prod"
-      data-reveal="true"
-      style={{ "--d": `${index * 0.05}s` }}
-    >
-      <Link className="af-prod__main" to={`/product/${product.id}`}>
-        <div className="af-prod__logo" aria-hidden="true">
-          <span>{product.badge}</span>
-        </div>
-        <div className="af-prod__copy">
-          <p className="af-prod__eyebrow">
-            {isAvailable ? "Ready to deliver" : "Currently unavailable"}
-          </p>
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-        </div>
-      </Link>
-      <button
-        className={`af-fav ${isFavorite ? "is-active" : ""}`}
-        type="button"
-        onClick={() => {
-          toggleFavoriteItem(product);
-          setIsFavorite((current) => !current);
-        }}
-        aria-label={`Add ${product.name} to favorites`}
-      >
-        <FaHeart />
-      </button>
-      <div className="af-prod__side">
-        <button
-          className="af-bell"
-          type="button"
-          aria-label={isAvailable ? "Product alerts" : "Notify when available"}
-        >
-          <FaBell />
-        </button>
-        <strong>${product.price}</strong>
-        <span className={isAvailable ? "af-stock" : "af-out"}>
-          {product.delivery}
-        </span>
-        {isAvailable && (
-          <button
-            className="af-cart"
-            type="button"
-            onClick={() => addCartItem(product)}
-            aria-label={`Add ${product.name} to cart`}
-          >
-            <FaShoppingCart />
-          </button>
-        )}
-      </div>
-    </article>
-  );
-};
-
-const CategoryDetails = ({ category }) => (
-  <section className="af-panel af-content af-page__body">
-    <h2>What this category means</h2>
-    <p>
-      {category.description} Each listing is checked before it is published, and
-      the product row shows the delivery state available at the moment you
-      browse.
-    </p>
-    <p>
-      The right choice depends on the job: fresh accounts suit testing, while
-      older or reviewed profiles are better when campaign downtime costs more
-      than the account itself.
-    </p>
-    <h2>What to look at when choosing</h2>
-    <p>
-      Pay attention to age, geo, included access, verification status and the
-      stock indicator. Contents can differ from one listing to the next, so the
-      individual description remains the source of truth.
-    </p>
-    <p>
-      Use a separate browser profile and a stable connection for each account.
-      This keeps your setup organized and makes the delivered details easier to
-      verify.
-    </p>
-    <h2>What is included</h2>
-    <p>
-      Listings may include email access, cookies, tokens, pages, documents,
-      two-factor authentication or business assets. The exact bundle is written
-      on each product row.
-    </p>
-    <h2>How delivery works</h2>
-    <p>
-      Payment is followed by automatic delivery to the customer area. If an item
-      is unavailable, use the bell control to request an availability
-      notification.
-    </p>
-  </section>
-);
 
 export default CategoryPage;

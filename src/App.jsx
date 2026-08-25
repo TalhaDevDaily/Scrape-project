@@ -10,6 +10,8 @@ import BlogDetail from "./pages/BlogDetail";
 import Checker from "./pages/Checker";
 import Favourites from "./pages/Favourites";
 import FavouritesDetail from "./pages/FavouritesDetail";
+import Login from "./pages/Auth/Login";
+import SignUp from "./pages/Auth/SignUp";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
             <Route path="category/:categorySlug" element={<CategoryPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
         </Routes>
       </BrowserRouter>
     </>
